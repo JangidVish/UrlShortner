@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+    <style>
+        body {
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            align-content: center;
+            color: white;
+            background-color: #49243E;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .form>form {
+            display: flex;
+            flex-direction: column;
+            align-content: center;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .form>form>input[type="text"] {
+            font-size: 19px;
+            border-radius: .5rem;
+            padding: 4px;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .form>form>button {
+            border-radius: .5rem;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 25px;
+            font-weight: bold;
+            width: 100%;
+            padding: 4px;
+            cursor: pointer;
+            border: none;
+            background-color: #97BE5A;
+
+        }
+
+        .form {
+            margin-bottom: 1rem;
+            font-size: 27px;
+        }
+
+        .table-data>table {
+            text-align: left;
+            overflow: hidden;
+            width: 80%;
+            margin: 0 auto;
+            display: table;
+            padding: 0 0 8em 0;
+        }
+
+        .table-data>table>thead {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1
+        style="font-size: 43px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+        Url Shortner</h1>
+
+    <div class="form">
+        <form method="POST" action="/url">
+            <label>
+                Enter Your Orignal Url
+            </label>
+            <input type="text" name="url" placeholder="https://example.com" id="">
+            <button type="submit">Generate</button>
+        </form>
+    </div>
+    <% if (locals.id) { %>
+        <p>URL Generated:
+            <a href="http://localhost:3000/url/<%= id %>"> http://localhost:3000/url/<%= id %></a>
+        </p>
+        <% } else { %>
+            <p style="color: red;">Url is required</p>
+            <% } %>
+
+                <div class="table-data">
+                    <% if (locals.urls) { %>
+                        <table>
+                            <thead>
+                                <th>Sr. No</th>
+                                <th>Short Id</th>
+                                <th>Redirect</th>
+                                <th>Clicks</th>
+                            </thead>
+                            <tbody>
+                                <% urls.forEach((url,index)=> { %>
+                                    <tr>
+                                        <td>
+                                            <%= index +1 %>
+                                        </td>
+                                        <td>
+                                            <%= url.shortId %>
+                                        </td>
+                                        <td>
+                                            <%= url.redirectUrl %>
+                                        </td>
+                                        <td>
+                                            <%= url.visitHistory.length %>
+                                        </td>
+
+                                        <% }) %>
+                                    </tr>
+                            </tbody>
+                        </table>
+                        <% } %>
+                </div>
+
+</body>
+
+</html>
